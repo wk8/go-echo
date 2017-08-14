@@ -1,0 +1,9 @@
+{
+  "name": "Simple echo server",
+  "keywords": [
+    "go",
+  ],
+  "image": "heroku/go:1.8",
+  "website": "https://github.com/wk8/go-echo",
+  "repository": "https://github.com/wk8/go-echo"
+}
