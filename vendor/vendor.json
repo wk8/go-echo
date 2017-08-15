@@ -1,7 +1,3 @@
 {
-	"comment": "",
-	"ignore": "test",
-	"package": [
-	],
-	"rootPath": "github.com/heroku/go-getting-started"
+	"rootPath": "github.com/wk8/rgergerger"
 }
