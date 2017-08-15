@@ -1,1 +1,1 @@
-web: echo
+web: go-echo
