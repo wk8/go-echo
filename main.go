@@ -12,7 +12,7 @@ import (
 func main() {
 	defaultPort := os.Getenv("PORT")
 	if defaultPort == "" {
-		defaultPort = "80"
+		defaultPort = "8282"
 	}
 
 	port := flag.String("p", defaultPort, "The port to listen on")
