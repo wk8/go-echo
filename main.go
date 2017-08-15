@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	port := flag.Int("p", 8282, "The port to listen on")
+	port := flag.Int("p", 80, "The port to listen on")
 	addr := "0.0.0.0:" + strconv.Itoa(*port)
 	server := http.Server{
 		Addr:    addr,

@@ -1,0 +1,7 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+	],
+	"rootPath": "github.com/heroku/go-getting-started"
+}
