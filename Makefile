@@ -1,10 +1,9 @@
 SHELL := /bin/bash
 
-# TODO wkpo echo?
 .PHONY: run
 run:
-	go run main.go
+	go run echo.go
 
 .PHONY: build
 build:
-	go build main.go
+	go build echo.go
