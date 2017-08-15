@@ -6,12 +6,19 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"strconv"
+	"os"
 )
 
 func main() {
-	port := flag.Int("p", 80, "The port to listen on")
-	addr := "0.0.0.0:" + strconv.Itoa(*port)
+	defaultPort := os.Getenv("PORT")
+	if defaultPort == "" {
+		defaultPort = "80"
+	}
+
+	port := flag.String("p", defaultPort, "The port to listen on")
+	flag.Parse()
+
+	addr := "0.0.0.0:" + *port
 	server := http.Server{
 		Addr:    addr,
 		Handler: &echoServer{},
