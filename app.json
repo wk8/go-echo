@@ -1,0 +1,8 @@
+{
+  "name": "Echo",
+  "description": "Very basic HTTP server for the purpose of testing HTTP clients",
+  "image": "heroku/go:1.8",
+  "mount_dir": "src/github.com/wk8/go-echo",
+  "website": "http://github.com/wk8/go-echo",
+  "repository": "http://github.com/wk8/go-echo"
+}
