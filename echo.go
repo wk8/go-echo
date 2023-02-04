@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -23,6 +25,8 @@ func main() {
 		Addr:    addr,
 		Handler: &echoServer{},
 	}
+
+	log.Infof("Listening on port %s", *port)
 
 	if err := server.ListenAndServe(); err != nil {
 		panic(err)
@@ -48,6 +52,8 @@ func (*echoServer) ServeHTTP(responseWriter http.ResponseWriter, request *http.R
 	if maybeReplyError(err, responseWriter) {
 		return
 	}
+
+	log.Infof("Replying with %s", string(responseAsBytes))
 
 	responseWriter.Write(responseAsBytes)
 }
