@@ -22,8 +22,10 @@ func main() {
 
 	addr := "0.0.0.0:" + *port
 	server := http.Server{
-		Addr:    addr,
-		Handler: &echoServer{},
+		Addr: addr,
+		Handler: &echoServer{
+			extraMetadata: os.Getenv("EXTRA_METADATA"),
+		},
 	}
 
 	log.Infof("Listening on port %s", *port)
@@ -33,9 +35,11 @@ func main() {
 	}
 }
 
-type echoServer struct{}
+type echoServer struct {
+	extraMetadata string
+}
 
-func (*echoServer) ServeHTTP(responseWriter http.ResponseWriter, request *http.Request) {
+func (e *echoServer) ServeHTTP(responseWriter http.ResponseWriter, request *http.Request) {
 	responseDoc := make(map[string]interface{})
 
 	responseDoc["method"] = request.Method
@@ -48,6 +52,10 @@ func (*echoServer) ServeHTTP(responseWriter http.ResponseWriter, request *http.R
 	}
 	responseDoc["body"] = string(bodyAsBytes)
 
+	if e.extraMetadata != "" {
+		responseDoc["extra_metadata"] = e.extraMetadata
+	}
+
 	responseAsBytes, err := json.Marshal(responseDoc)
 	if maybeReplyError(err, responseWriter) {
 		return
@@ -55,6 +63,7 @@ func (*echoServer) ServeHTTP(responseWriter http.ResponseWriter, request *http.R
 
 	log.Infof("Replying with %s", string(responseAsBytes))
 
+	responseWriter.Header().Set("Content-Type", "application/json")
 	responseWriter.Write(responseAsBytes)
 }
 
